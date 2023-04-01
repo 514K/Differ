@@ -36,8 +36,8 @@ func main() {
 
 		fmt.Printf("%v; %v\n", len(arr1), len(arr2))
 
-		for i := 0; i < 3; i++ {
-			for j := 0; j < 10; j++ {
+		for i := 0; i < len(arr1); i++ {
+			for j := 0; j < len(arr2); j++ {
 				i, j = compareLines(i, j, arr1, arr2)
 			}
 		}
