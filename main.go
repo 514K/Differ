@@ -24,7 +24,6 @@ func main() {
 		arr2 := make([]string, 0)
 
 		go readFile(os.Args[1], &arr1, c1)
-
 		go readFile(os.Args[2], &arr2, c2)
 
 		for {
@@ -34,10 +33,30 @@ func main() {
 				break
 			}
 		}
+
+		fmt.Printf("%v; %v\n", len(arr1), len(arr2))
+
+		for i := 0; i < 3; i++ {
+			for j := 0; j < 10; j++ {
+				i, j = compareLines(i, j, arr1, arr2)
+			}
+		}
 	}
+
 	// fmt.Printf(ANSI_RED + "My red text?" + ANSI_REDL + "Sas" + ANSI_RED + "Ke" + ANSI_RESET) ШАБЛОН КОДА ДЛЯ ВЫДЕЛЕНИЯ СТРОКИ В КОНСОЛИ
 	fmt.Print("\n")
 	fmt.Print(time.Since(t))
+}
+
+// Будет возвращать i, j строк с которых надо продолжать поиск
+func compareLines(nl1 int, nl2 int, arr1 []string, arr2 []string) (int, int) {
+	// Поиск слов по строкам с номера строки nl1 из arr1 и номера строки nl2 из arr2
+	for i := nl1; i < len(arr1); i++ {
+		for j := nl2; j < len(arr2); j++ {
+			// Тут сам поиск и изменение nl1 и nl2
+		}
+	}
+	return nl1, nl2
 }
 
 func readFile(filename string, arr *[]string, ch chan int) {
@@ -54,7 +73,7 @@ func readFile(filename string, arr *[]string, ch chan int) {
 		for {
 			_, err := file.Read(data)
 			if err == io.EOF {
-				*arr = append(*arr, tmpstr+"\n")
+				*arr = append(*arr, tmpstr)
 				break
 			}
 
