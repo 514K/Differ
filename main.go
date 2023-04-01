@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"time"
 )
 
 var ANSI_RESET string = "\u001B[0m"
@@ -12,6 +13,7 @@ var ANSI_GREEN string = "\u001b[42m"
 var ANSI_REDL string = "\u001b[48;5;9m"
 
 func main() {
+	t := time.Now()
 	if len(os.Args) != 3 {
 		return
 	} else {
@@ -25,7 +27,7 @@ func main() {
 			defer file1.Close()
 			defer file2.Close()
 
-			data := make([]byte, 64)
+			data := make([]byte, 1)
 
 			// lines1 := make([]string, 64)
 			// lines2 := make([]string, 64)
@@ -36,10 +38,15 @@ func main() {
 				if err == io.EOF {
 					break
 				}
-				fmt.Print(string(data[:n]))
-				break
+
+				if n != 0 {
+
+				}
+				// fmt.Print(string(data[:n]))
 			}
 		}
 	}
-	fmt.Printf(ANSI_RED + "My red text?" + ANSI_REDL + "Sas" + ANSI_RED + "Ke" + ANSI_RESET)
+	// fmt.Printf(ANSI_RED + "My red text?" + ANSI_REDL + "Sas" + ANSI_RED + "Ke" + ANSI_RESET)
+
+	fmt.Print(time.Since(t))
 }
