@@ -104,7 +104,7 @@ func compareLines(nl1 int, nl2 int, arr1 []string, arr2 []string) {
 							// Запоминаем номера строк???
 
 							if nl2 < j {
-								printGreen(nl2-1, j, arr2)
+								printGreen(nl2, j, arr2)
 							}
 							printDifference(arr1[i], arr2[j])
 
