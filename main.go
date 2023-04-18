@@ -80,14 +80,14 @@ func compareLines(nl1 int, nl2 int, arr1 []string, arr2 []string) {
 						if tmpstr1 == tmpstr2 {
 							// Строка найдена
 							strFind = true
-							// Запоминаем номера строк???
 
+							// Если у итогового файла пропущены строки, то они новые, выводим их зелеными
 							if nl2 < j {
 								printGreen(nl2, j, arr2)
 							}
 							printDifference(arr1[i], arr2[j])
 
-							// Дальше надо выйти из цикла по j
+							// Дальше надо выйти из цикла по j и запомнить новую строку для итогового файла, чтобы начать поиск с этой строки
 							nl2 = j + 1
 						}
 
@@ -120,7 +120,6 @@ func compareLines(nl1 int, nl2 int, arr1 []string, arr2 []string) {
 
 		}
 	}
-	// return nl1, nl2
 }
 
 func printGreen(lineStart int, lineStop int, arr2 []string) {
@@ -161,3 +160,7 @@ func readFile(filename string, arr *[]string, ch chan int) {
 	}
 	close(ch)
 }
+
+// Главная проблема, что находит строку из файла1 в файле2 очень далеко и поиск начинается дальше с далекой строки,
+// а это совсем не она на самом деле, поэтому надо искать и следующие строоки со старой строки из файла2, но это в разы увеличивает длительность...
+// Надо как-то прикрутить потоки...
